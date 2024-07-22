@@ -52,7 +52,7 @@ class DataPreparation:
 
             merged_df['date'] = pd.to_datetime(merged_df['date'], errors='coerce')
 
-            merged_df = merged_df.dropna(subset=['date', 'client_id', 'purchase_amount'])
+            merged_df = merged_df.dropna()
 
             logging.info("Cleaned date, purchase amount and dropped null values in Merged dataset")
 

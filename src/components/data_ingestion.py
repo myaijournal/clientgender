@@ -6,6 +6,9 @@ import pandas as pd
 from dataclasses import dataclass
 from src.components.data_preparation import DataPreparation
 from src.components.data_preparation import DataPreparationConfig
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
 
 @dataclass
 class DataIngestionConfig:
@@ -45,10 +48,28 @@ class DataIngestion:
         
 if __name__ == "__main__":
     obj = DataIngestion()
+    
     clientgender_data, purchase_history_data = obj.initiate_data_ingestion()
 
     data_prep = DataPreparation()
-    data_prep.merge_data_objects(clientgender_data, purchase_history_data)
+
+    merged_data_path = data_prep.merge_data_objects(clientgender_data, purchase_history_data)
+
+    data_trans = DataTransformation()
+
+    feature_engineered_data_path = data_trans.create_features(merged_data_path)
+
+    features_path, target_path, preprocessor_obj_path = data_trans.apply_preprocessing(feature_engineered_data_path)
+
+    X_train_path, X_test_path, y_train_path, y_test_path, X_train_resampled_path, y_train_resampled_path = data_trans.split_and_resample(features_path, target_path)
+
+
+
+
+    
+
+
+
 
 
 
