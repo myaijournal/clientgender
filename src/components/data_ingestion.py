@@ -8,7 +8,8 @@ from src.components.data_preparation import DataPreparation
 from src.components.data_preparation import DataPreparationConfig
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
-
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig
 
 @dataclass
 class DataIngestionConfig:
@@ -62,6 +63,12 @@ if __name__ == "__main__":
     features_path, target_path, preprocessor_obj_path = data_trans.apply_preprocessing(feature_engineered_data_path)
 
     X_train_path, X_test_path, y_train_path, y_test_path, X_train_resampled_path, y_train_resampled_path = data_trans.split_and_resample(features_path, target_path)
+
+    model_training = ModelTrainer()
+
+    print(model_training.initiate_model_trainer(X_train_path, X_test_path, y_train_path, y_test_path))
+
+
 
 
 
