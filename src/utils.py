@@ -46,3 +46,35 @@ def evaluate_models(X_train_resampled, y_train_resampled, X_test, y_test,models)
 
     except Exception as e:
         raise CustomException(e, sys)
+    
+
+## With hyper param tuning above evaluate_models() will become
+
+# def evaluate_models(X_train, y_train, X_test, y_test, models, param_grids):
+#     try:
+#         report = {}
+        
+#         # Dictionary to store the best models from GridSearchCV
+#         best_models = {}
+
+#         for name, model in models.items():
+            
+#             grid_search = GridSearchCV(model, param_grids[name], cv=5, n_jobs=-1, scoring='accuracy')
+#             grid_search.fit(X_train, y_train)
+            
+#             best_model = grid_search.best_estimator_
+#             best_models[name] = best_model
+            
+#             y_train_pred = best_model.predict(X_train)
+#             y_test_pred = best_model.predict(X_test)
+            
+#             train_model_score = accuracy_score(y_train, y_train_pred)
+#             test_model_score = accuracy_score(y_test, y_test_pred)
+            
+#             report[name] = test_model_score
+
+#         return report, best_models
+    
+#     except Exception as e:
+#         raise CustomException(e, sys)
+    
